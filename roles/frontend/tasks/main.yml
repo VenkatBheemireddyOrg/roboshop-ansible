@@ -24,15 +24,14 @@
     path: /usr/share/nginx/html
     state: directory
 
-- name: Download and Extract Frontend Content
+- name: Download and extract frontend content
   ansible.builtin.unarchive:
     src: https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
     dest: /usr/share/nginx/html
     remote_src: yes
 
-- name: Enable and Restart Nginx
+- name: Start Nginx service
   ansible.builtin.systemd_service:
-    name: nginx
     state: restarted
+    name: nginx
     enabled: true
-
