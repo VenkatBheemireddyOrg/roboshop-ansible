@@ -9,12 +9,6 @@
     name: nginx
     state: installed
 
-- name: Enable and Start Nginx
-  ansible.builtin.systemd_service:
-    name: nginx
-    state: started
-    enabled: true
-
 - name: Copy Nginx config file
   ansible.builtin.copy:
     src: nginx.conf
@@ -36,7 +30,14 @@
     dest: /usr/share/nginx/html
     remote_src: yes
 
-- name: Restart Service
+
+- name: Enable and Start Nginx
   ansible.builtin.systemd_service:
-    state: started
     name: nginx
+    state: started
+    enabled: true
+
+#- name: Restart Service
+##  ansible.builtin.systemd_service:
+##    state: started
+##    name: nginx
