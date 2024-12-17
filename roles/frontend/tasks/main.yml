@@ -1,7 +1,7 @@
-- name: Disable Default Nginx Version
+- name: Disable nginx default version
   ansible.builtin.shell: dnf module disable nginx -y
 
-- name: Enable Nginx 1.24 Version
+- name: Enable Nginx 1.24 version
   ansible.builtin.shell: dnf module enable nginx:1.24 -y
 
 - name: Install Nginx
@@ -9,12 +9,12 @@
     name: nginx
     state: installed
 
-- name: Copy Nginx Config File
+- name: Copy Nginx config file
   ansible.builtin.copy:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
 
-- name: Remove Nginx Directory
+- name: Remove nginx directory
   ansible.builtin.file:
     path: /usr/share/nginx/html
     state: absent
