@@ -4,7 +4,7 @@
 - name: Setup Systemd Service File
   ansible.builtin.copy:
     src: "{{ app_name }}".service
-    dest: /etc/systemd/system/"{{ app_name }}".service
+    dest: /etc/systemd/system/{{ app_name }}.service
 
 #echo Start Application
 #systemctl daemon-reload &>>$log_file
