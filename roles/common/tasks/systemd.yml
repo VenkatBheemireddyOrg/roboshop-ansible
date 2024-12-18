@@ -3,8 +3,8 @@
 #Status_Print $?
 - name: Setup Systemd Service File
   ansible.builtin.copy:
-    src: "{{ component_name }}".service
-    dest: /etc/systemd/system/"{{ component_name }}".service
+    src: "{{ app_name }}".service
+    dest: /etc/systemd/system/"{{ app_name }}".service
 
 #echo Start Application
 #systemctl daemon-reload &>>$log_file
@@ -13,7 +13,7 @@
 #Status_Print $?
 - name: Start Application
   ansible.builtin.systemd_service:
-    name: "{{ component_name }}"
+    name: "{{ app_name }}"
     state: started
     enabled: true
     daemon_reload: true
