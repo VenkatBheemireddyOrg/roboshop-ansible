@@ -15,7 +15,7 @@
 #Status_Print $?
 - name: Install NodeJS
   ansible.builtin.dnf:
-    name: NodeJS
+    name: nodejs
     state: installed
 
 #APP_PREREQ
