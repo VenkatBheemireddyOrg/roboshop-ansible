@@ -24,10 +24,10 @@
     state: installed
 
 #echo Load Master Data
-#mongosh --host mongodb-dev.azdevopsb82.online </app/db/master-data.js &>>$log_file
+#mongosh --host mongodb-dev.azdevopsv82.online </app/db/master-data.js &>>$log_file
 #Status_Print $?
 - name: Load Master Data
   community.mongodb.mongodb_shell:
-  login_host:
-  file: "/app/db/master-data.js"
-  idempotent: yes
+    login_host: mongodb-dev.azdevopsv82.online
+    file: "/app/db/master-data.js"
+    idempotent: yes
