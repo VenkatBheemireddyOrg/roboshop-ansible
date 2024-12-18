@@ -10,11 +10,24 @@
 #echo Copy MongoDB repo file
 #cp $dir_path/mongo.repo /etc/yum.repos.d/mongo.repo &>>$log_file
 #Status_Print $?
-#
+- name: Copy MongoDB repo file
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
 #echo Install Mongo Client
 #dnf install mongodb-mongosh -y &>>$log_file
 #Status_Print $?
-#
+- name: Install Mongo Client
+  ansible.builtin.dnf:
+    name: mongodb-mongosh
+    state: installed
+
 #echo Load Master Data
 #mongosh --host mongodb-dev.azdevopsb82.online </app/db/master-data.js &>>$log_file
 #Status_Print $?
+- name: Load Master Data
+  community.mongodb.mongodb_shell:
+  login_host:
+  file: "/app/db/master-data.js"
+  idempotent: yes
