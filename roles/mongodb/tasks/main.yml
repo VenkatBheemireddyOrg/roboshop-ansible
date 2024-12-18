@@ -16,6 +16,14 @@
     name: mongodb-org
     state: installed
 
+#echo Start MongoDB service
+#systemctl enable mongod &>>$log_file
+- name: Enable and Start MongoDB
+  ansible.builtin.systemd_service:
+    name: mongod
+    state: started
+    enabled: true
+
 #echo Update MongoDB listen address
 #sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$log_file
 #Status_Print $?
@@ -25,12 +33,10 @@
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
 
-#echo Start MongoDB service
-#systemctl enable mongod &>>$log_file
+
 #systemctl restart mongod &>>$log_file
 #Status_Print $?
-- name: Enable and Start MongoDB
+- name: Restart MongoDB
   ansible.builtin.systemd_service:
     name: mongod
-    state: started
-    enabled: true
+    state: restarted
