@@ -30,7 +30,7 @@
     remote_src: yes
 
 - name: Go to app directory
-  ansible.builtin.shell: cd /app
+  ansible.builtin.shell: pwd
 
 - name: Install dependencies
   ansible.builtin.shell: npm install
