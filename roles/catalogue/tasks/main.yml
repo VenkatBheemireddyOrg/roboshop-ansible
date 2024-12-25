@@ -31,6 +31,11 @@
 
 - name: Go to app directory
   ansible.builtin.shell: pwd
+  register: out
+
+- name: Display Current Location
+  ansible.builtin.debug:
+    msg: {{ out }}
 
 - name: Install dependencies
   ansible.builtin.shell: npm install
