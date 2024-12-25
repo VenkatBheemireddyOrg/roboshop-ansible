@@ -31,11 +31,7 @@
 
 - name: Install dependencies
   community.general.npm:
-    name: npm
     path: /app
-
-#- name: Install dependencies
-#  ansible.builtin.shell: npm install
 
 - name: Setup systemD service file
   ansible.builtin.template:
