@@ -39,8 +39,8 @@
 - name: Enable nginx
   ansible.builtin.shell: systemctl enable nginx
 
-#- name: Start nginx
-#  ansible.builtin.shell: systemctl start nginx
+- name: Start nginx
+  ansible.builtin.shell: systemctl restart nginx
 
 - name: Restart nginx service
   ansible.builtin.systemd_service:
