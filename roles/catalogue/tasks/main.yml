@@ -1,7 +1,35 @@
-- name: Import NodeJS Common Role
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: nodejs
+- name: Disable Default NodeJS Version
+  ansible.builtin.shell: dnf module disable nodejs -y
+
+- name: Enable NodeJS 20 Version
+  ansible.builtin.shell: dnf module enable nodejs:20 -y
+
+- name: Install NodeJS
+  ansible.builtin.dnf:
+    name: nodejs
+    state: installed
+##########################
+
+- name: Create Application User
+  ansible.builtin.user:
+    name: roboshop
+
+- name: Remove application directory
+  ansible.builtin.file:
+    path: /app
+    state: absent
+
+- name: Create application directory
+  ansible.builtin.file:
+    path: /app
+    state: directory
+
+- name: Download and extract app content
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/{{ app_name }}-v3.zip
+    dest: /app
+    remote_src: yes
+########################
 
 - name:  Copy MongoDB repo file
   ansible.builtin.template:
@@ -12,7 +40,19 @@
   ansible.builtin.dnf:
     name: mongodb-mongosh
     state: installed
+##################################
+- name: Setup SystemD service file
+  ansible.builtin.template:
+    src: "{{ app_name }}.service"
+    dest: /etc/systemd/system/{{ app_name }}.service
 
+- name: Start Application
+  ansible.builtin.systemd_service:
+    name: "{{ app_name }}"
+    state: restarted
+    enabled: true
+    daemon_reload: true
+#############################################
 - name: Load Master Data
   community.mongodb.mongodb_shell:
     login_host: mongodb-{{ ENV }}.azdevopsv82.online
