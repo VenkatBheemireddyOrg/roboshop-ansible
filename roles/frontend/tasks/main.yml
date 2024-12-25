@@ -9,12 +9,6 @@
      name: nginx
      state: installed
 
-- name: Enable nginx
-  ansible.builtin.shell: systemctl enable nginx
-
-- name: Start nginx
-  ansible.builtin.shell: systemctl start nginx
-
 - name: Enable and start nginx service
   ansible.builtin.systemd_service:
     name: nginx
@@ -41,6 +35,12 @@
   ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
+
+- name: Enable nginx
+  ansible.builtin.shell: systemctl enable nginx
+
+#- name: Start nginx
+#  ansible.builtin.shell: systemctl start nginx
 
 - name: Restart nginx service
   ansible.builtin.systemd_service:
