@@ -39,10 +39,10 @@
 - name: Enable nginx
   ansible.builtin.shell: systemctl enable nginx
 
-- name: Start nginx
-  ansible.builtin.shell: systemctl start nginx
+#- name: Start nginx
+#  ansible.builtin.shell: systemctl start nginx
 
-#- name: Start nginx service
-#  ansible.builtin.systemd_service:
-#    name: nginx
-#    state: started
+- name: Start nginx service
+  ansible.builtin.systemd_service:
+    name: nginx
+    state: started
