@@ -29,16 +29,13 @@
     dest: /app
     remote_src: yes
 
-- name: Go to app directory
-  ansible.builtin.shell: pwd
-  register: out
-
-- name: Display Current Location
-  ansible.builtin.debug:
-    msg: {{ out }}
-
 - name: Install dependencies
-  ansible.builtin.shell: npm install
+  community.general.npm:
+    name: npm
+    path: /app
+
+#- name: Install dependencies
+#  ansible.builtin.shell: npm install
 
 - name: Setup systemD service file
   ansible.builtin.template:
