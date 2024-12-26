@@ -1,5 +1,5 @@
-- name: Roboshop Ansible Project
+- name: Roboshop Project - Ansible
   hosts: all
   become: true
   roles:
-    - "{{ app_name }}"
+    - "{{ app }}"
