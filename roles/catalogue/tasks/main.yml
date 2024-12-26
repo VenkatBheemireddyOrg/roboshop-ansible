@@ -38,11 +38,11 @@
     src: catalogue.service
     dest: /etc/systemd/system/catalogue.service
 
-- name: Start application
+- name: Enable and start application with daemon
   ansible.builtin.systemd_service:
     name: catalogue
-    state: started
     enabled: true
+    state: started
     daemon_reload: true
 
 - name:  Copy MongoDB repo file
@@ -57,6 +57,6 @@
 
 - name: Load Master Data
   community.mongodb.mongodb_shell:
-    login_host: mongodb-dev.azdevopsv82.online
+    login_host: mongodb.azdevopsv82.online
     file: "/app/db/master-data.js"
     idempotent: yes
