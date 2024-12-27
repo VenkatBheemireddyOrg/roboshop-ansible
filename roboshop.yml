@@ -1,4 +1,4 @@
-- name: Roboshop Project - Ansible
+- name: Ansible Roboshop Project
   hosts: all
   become: true
   roles:
