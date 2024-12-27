@@ -5,7 +5,7 @@
 
 - name: Enable and start application with daemon
   ansible.builtin.systemd_service:
-    name: {{ appl }}
+    name: "{{ appl }}"
     enabled: true
     state: restarted
     daemon_reload: true
