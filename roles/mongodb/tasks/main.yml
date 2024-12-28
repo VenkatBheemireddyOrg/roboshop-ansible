@@ -8,20 +8,14 @@
     name: mongodb-org
     state: installed
 
-- name: Enable and start MongoDB service
-  ansible.builtin.systemd_service:
-    name: mongod
-    enabled: true
-    state: started
-
 - name: Update listen address
   ansible.builtin.replace:
     path: /etc/mongod.conf
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
-### check cat /etc/mongod.conf after above task execution
 
 - name: Restart MongoDB service
   ansible.builtin.systemd_service:
     name: mongod
+    enabled: true
     state: restarted

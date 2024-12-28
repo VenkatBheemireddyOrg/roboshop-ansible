@@ -6,7 +6,7 @@
 - name: User and Application Setup
   ansible.builtin.include_role:
     name: common
-    tasks_from: extract
+    tasks_from: prereq
 
 - name: Systemd Setup including daemon
   ansible.builtin.include_role:
